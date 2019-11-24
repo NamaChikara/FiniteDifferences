@@ -5,9 +5,18 @@ class TrapezoidalRule(val fun: Double => Double, val a: Double, val b: Double)
 
   require(a < b)
 
-  def approx(n: Int): Vector[Double] = {
+  def approx(n: Int): Option[Double] = {
 
-    getMeshValues(mesh(n))
+    if (n <= 0) {
+      None
+    } else {
+      val funOnMesh = getMeshValues(mesh(n))
+      val approx = funOnMesh
+        .sliding(2)
+        .map(_.sum / 2)
+        .sum
+      Some(approx)
+    }
 
   }
 }
