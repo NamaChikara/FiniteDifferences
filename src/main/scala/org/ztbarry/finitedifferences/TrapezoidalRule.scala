@@ -15,7 +15,7 @@ class TrapezoidalRule(val fun: Double => Double, val a: Double, val b: Double)
         .sliding(2)
         .map(_.sum / 2)
         .sum
-      Some(approx)
+      Some(approx * (b - a) / n)
     }
 
   }
