@@ -1,21 +1,21 @@
 package org.ztbarry.finitedifferences
 
 class TrapezoidalRule(val fun: Double => Double, val a: Double, val b: Double)
-  extends Difference1D with Mesh1D {
+  extends Difference1D {
 
   require(a < b)
 
-  def approx(n: Int): Option[Double] = {
+  def approx(h: Int): Option[Double] = {
 
-    if (n <= 0) {
+    if (h <= 0) {
       None
     } else {
-      val funOnMesh = getMeshValues(mesh(n))
+      val funOnMesh = getMeshValues(h)
       val approx = funOnMesh
         .sliding(2)
         .map(_.sum / 2)
         .sum
-      Some(approx * (b - a) / n)
+      Some(approx * (b - a) / h)
     }
 
   }

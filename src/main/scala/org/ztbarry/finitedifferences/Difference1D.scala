@@ -1,11 +1,11 @@
 package org.ztbarry.finitedifferences
 
-trait Difference1D {
+trait Difference1D extends Mesh1D {
 
   def fun: Double => Double
 
-  def getMeshValues(mesh: Vector[Double]): Vector[Double] = {
-    mesh.map(fun)
+  def getMeshValues(h: Int): Vector[Double] = {
+    mesh(h).map(fun)
   }
 
 }
