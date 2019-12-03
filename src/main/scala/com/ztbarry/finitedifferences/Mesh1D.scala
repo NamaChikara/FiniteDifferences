@@ -1,4 +1,4 @@
-package org.ztbarry.finitedifferences
+package com.ztbarry.finitedifferences
 
 trait Mesh1D {
 

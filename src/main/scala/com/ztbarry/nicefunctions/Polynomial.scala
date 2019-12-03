@@ -1,4 +1,4 @@
-package org.ztbarry.nicefunctions
+package com.ztbarry.nicefunctions
 import scala.math.pow
 import scala.math.max
 // https://docs.scala-lang.org/getting-started/intellij-track/testing-scala-in-intellij-with-scalatest.html

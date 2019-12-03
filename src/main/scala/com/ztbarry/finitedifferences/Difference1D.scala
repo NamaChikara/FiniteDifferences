@@ -1,4 +1,4 @@
-package org.ztbarry.finitedifferences
+package com.ztbarry.finitedifferences
 
 import scala.math.log10
 
@@ -13,7 +13,7 @@ trait Difference1D extends Mesh1D {
   def getMeshValues(n: Int): Vector[Double] = {
     mesh(n).map(fun)
   }
-
+  // http://www.csc.kth.se/utbildning/kth/kurser/DN2255/ndiff13/ConvRate.pdf
   def approxConvergenceOrder(n: Int): Option[Double] = {
 
     val nApprox = meshIntegral(n)

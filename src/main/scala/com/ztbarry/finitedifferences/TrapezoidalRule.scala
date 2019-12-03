@@ -1,4 +1,4 @@
-package org.ztbarry.finitedifferences
+package com.ztbarry.finitedifferences
 
 class TrapezoidalRule(val fun: Double => Double, val a: Double, val b: Double)
   extends Difference1D {
