@@ -3,8 +3,6 @@ package com.ztbarry.finitedifferences
 class TrapezoidalRule(val fun: Double => Double, val a: Double, val b: Double)
   extends Difference1D {
 
-  require(a < b)
-
   def meshIntegral(n: Int): Option[Double] = {
 
     if (n <= 0) {
