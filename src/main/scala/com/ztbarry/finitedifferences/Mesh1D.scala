@@ -15,7 +15,7 @@ trait Mesh1D {
   val a: Double
   val b: Double
 
-  require(a < b)
+  require(a < b, f"Error: $a is not less than $b")
 
   /**
    * Creates a regular partition of an interval [a, b].
