@@ -16,7 +16,7 @@ class Mesh1DTest extends FunSuite {
 
   test("create mesh") {
     val myMesh = new { val a = 1.0; val b = 2.0 } with Mesh1D {}
-    assert(myMesh.mesh(4) == Vector[Double](1.00, 1.25, 1.50, 1.75, 2.00))
+    assert(myMesh.mesh(4) == Right(Vector[Double](1.00, 1.25, 1.50, 1.75, 2.00)))
   }
 
 }

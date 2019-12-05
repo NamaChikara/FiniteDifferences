@@ -23,10 +23,15 @@ trait Mesh1D {
    * @param  n  the number of partitions.
    * @return an ordered vector containing the points of the partition, including endpoints.
    */
-  def mesh(n: Int): Vector[Double] = {
+  def mesh(n: Int): Either[String, Vector[Double]] = {
 
-    for (i <- Vector.range(0, n + 1)) yield {
-      a + i * (b - a) / n
+    if (n == 0) {
+      Left("n cannot be equal to 0")
+    } else {
+      val partition = for (i <- Vector.range(0, n + 1)) yield {
+        a + i * (b - a) / n
+      }
+      Right(partition)
     }
 
   }
