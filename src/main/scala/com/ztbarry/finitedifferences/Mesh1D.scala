@@ -26,7 +26,7 @@ trait Mesh1D {
   def mesh(n: Int): Either[String, Vector[Double]] = {
 
     if (n == 0) {
-      Left("n cannot be equal to 0")
+      Left("n must not be equal to 0")
     } else {
       val partition = for (i <- Vector.range(0, n + 1)) yield {
         a + i * (b - a) / n
