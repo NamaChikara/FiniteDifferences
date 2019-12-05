@@ -6,24 +6,32 @@ trait Difference1D extends Mesh1D {
 
   def fun: Double => Double
 
-  def meshIntegral(n: Int): Either[String, Double]
+  def numericalMethod(meshValues: Vector[Double]): Double
 
   private val log2 = (x: Double) => log10(x)/log10(2.0)
 
-  def getMeshValues(n: Int): Either[String, Vector[Double]] = {
+  private def getMeshValues(n: Int): Either[String, Vector[Double]] = {
     for {
       myMesh <- mesh(n)
     } yield {
-      myMesh.map(_ + 1)
+      myMesh.map(fun)
+    }
+  }
+
+  def approxIntegral(n: Int): Either[String, Double] = {
+    for {
+      meshValues <- getMeshValues(n)
+    } yield {
+      numericalMethod(meshValues)
     }
   }
   // http://www.csc.kth.se/utbildning/kth/kurser/DN2255/ndiff13/ConvRate.pdf
   def approxConvergenceOrder(n: Int): Either[String, Double] = {
 
     for {
-      nApprox  <- meshIntegral(n)
-      n2Approx <- meshIntegral(n * 2)
-      n4Approx <-  meshIntegral(n * 4)
+      nApprox  <- approxIntegral(n)
+      n2Approx <- approxIntegral(n * 2)
+      n4Approx <- approxIntegral(n * 4)
     } yield {
       log2((nApprox - n2Approx) / (n2Approx - n4Approx))
     }
