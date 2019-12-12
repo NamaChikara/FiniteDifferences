@@ -25,27 +25,34 @@ trait Difference1D extends Mesh1D {
       numericalMethod(meshValues)
     }
   }
+
+  private def getDifferenceRatio(num: Double, den: Double, n: Int): Either[String, Double] = {
+    if (num == 0) {
+      Left(f"Grid approximation of interval identical for n = $n and n = ${n * 2}.")
+    } else if (den == 0) {
+      Left(f"Grid approximation of interval identical for n = ${n * 2} and n = ${n * 4}.")
+    } else {
+      val ratio = num / den
+      if (ratio < 0) {
+        Left(f"Ratio of errors is less than 0.")
+      } else {
+        Right(log2(ratio))
+      }
+    }
+  }
   // http://www.csc.kth.se/utbildning/kth/kurser/DN2255/ndiff13/ConvRate.pdf
   def approxConvergenceOrder(n: Int): Either[String, Double] = {
-    for {
+    val differences = for {
       nApprox  <- approxIntegral(n * 2)
       n2Approx <- approxIntegral(n * 2)
       n4Approx <- approxIntegral(n * 4)
     } yield {
-      val numeratorDiff = nApprox - n2Approx
-      val denominatorDiff = n2Approx - n4Approx
-      if (numeratorDiff == 0) {
-        Left(f"Grid approximation of interval identical for n = $n and n = ${n * 2}.")
-      } else if (denominatorDiff == 0) {
-        Left(f"Grid approximation of interval identical for n = ${n * 2} and n = ${n * 4}.")
-      } else {
-        val ratio = numeratorDiff / denominatorDiff
-        if (ratio < 0) {
-          Left(f"Ratio of errors is less than 0.")
-        } else {
-          Right(log2(ratio))
-        }
-      }
+      Vector(nApprox - n2Approx, n2Approx - n4Approx)
     }
+
+    differences.fold(
+      l => Left(l),
+      r => getDifferenceRatio(r(0), r(1), n)
+    )
   }
 }
