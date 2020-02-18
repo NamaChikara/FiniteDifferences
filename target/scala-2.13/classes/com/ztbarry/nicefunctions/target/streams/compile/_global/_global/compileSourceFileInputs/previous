@@ -1,0 +1,1 @@
+["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.12.10":{"hashes":[["/Users/zackbarry/Documents/FiniteDifferences/src/main/scala/com/ztbarry/nicefunctions/Polynomial.scala","41c645c225cefad6611d3aceb65a48822f5992e9"]],"lastModifiedTimes":[]}}]

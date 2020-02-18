@@ -1,5 +1,6 @@
-package org.ztbarry.nicefunctions
-
+package com.ztbarry.nicefunctions
+// https://docs.scala-lang.org/getting-started/intellij-track/testing-scala-in-intellij-with-scalatest.html
+//
 class PolynomialTest extends org.scalatest.FunSuite {
 
   test("Constant polynomial evaluation.") {
